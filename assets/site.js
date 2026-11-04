@@ -34,6 +34,19 @@ const preload = new IntersectionObserver((entries) => {
   }
 }, { rootMargin: '150% 0px' });
 
+const toTop = document.querySelector('.to-top');
+const cover = document.querySelector('.slide');
+
+new IntersectionObserver(([entry]) => {
+  toTop.classList.toggle('is-shown', !entry.isIntersecting);
+}).observe(cover);
+
+toTop.addEventListener('click', (e) => {
+  e.preventDefault();
+  scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+  history.replaceState(null, '', location.pathname);
+});
+
 document.querySelectorAll('video').forEach((v) => {
   if (reducedMotion) {
     v.controls = true;

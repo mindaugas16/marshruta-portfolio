@@ -57,6 +57,9 @@ ${slides.map(slide).join('\n')}
     <a href="mailto:morkuneruta@gmail.com">morkuneruta@gmail.com</a>
     <span>© ${new Date().getFullYear()} Rūta Morkūnė</span>
   </footer>
+  <a class="to-top" href="#top" aria-label="Į viršų">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </a>
   <script src="assets/site.js" defer></script>
 </body>
 </html>
