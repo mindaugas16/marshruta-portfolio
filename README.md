@@ -3,8 +3,7 @@
 Rūta Morkūnė's portfolio, generated from her Figma file and served by GitHub Pages.
 
 - `slides.json` — every slide's Figma frame, in page order. The site is built from it.
-- `partials/` — the cover and about slides, rebuilt as responsive HTML.
-- `assets/slides/` — the other slides as WebP (1920 and 960 wide).
+- `assets/slides/` — every slide as WebP (1920 and 960 wide); for animated slides this is the poster.
 - `assets/video/` — animated slides, rendered by Figma as MP4.
 
 ## Updating after a Figma change
@@ -23,4 +22,4 @@ python3 -m http.server 4173            # preview at http://localhost:4173
 
 - One top-level 1920×1080 frame per slide, ordered top to bottom.
 - Edit frames rather than duplicating them, so their ids stay the same.
-- Put "anim" in the name of a frame that has animation.
+- Put a "<-- animacija" label next to a frame that has animation.

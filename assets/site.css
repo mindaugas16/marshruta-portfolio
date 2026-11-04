@@ -48,7 +48,6 @@ footer.bar a { color: var(--ink); text-transform: none; }
 .slide {
   position: relative;
   margin: 0;
-  container-type: inline-size;
   overflow: hidden;
 }
 
@@ -58,140 +57,6 @@ footer.bar a { color: var(--ink); text-transform: none; }
   height: auto;
   aspect-ratio: 16 / 9;
   background: #262626;
-}
-
-/* Hand-built slides are laid out in Figma's 1920×1080 pixels; --u is one of those pixels. */
-.canvas {
-  --u: calc(100cqw / 1920);
-  position: relative;
-  aspect-ratio: 16 / 9;
-  color: #000;
-}
-.canvas > * { position: absolute; margin: 0; }
-
-/* 01 · Cover */
-.cover .canvas { background: var(--orange); }
-.cover-meta,
-.cover-contact {
-  font: 600 max(9px, calc(15 * var(--u))) / max(16px, calc(27 * var(--u))) Montserrat, sans-serif;
-  text-transform: uppercase;
-}
-.cover-meta { left: calc(82 * var(--u)); top: calc(62 * var(--u)); }
-.cover-contact {
-  right: calc(78 * var(--u));
-  top: calc(63 * var(--u));
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  font-style: normal;
-}
-.cover-bird {
-  left: calc(594 * var(--u));
-  top: calc(144 * var(--u));
-  width: calc(732 * var(--u));
-  height: calc(519 * var(--u));
-  object-fit: cover;
-}
-.cover-title {
-  left: calc(57 * var(--u));
-  top: calc(880 * var(--u));
-  font: 900 calc(336 * var(--u)) / calc(60 * var(--u)) Roboto, sans-serif;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-/* 02 · Apie */
-.about .canvas { background: #e5e6e5; }
-.about-title {
-  left: calc(80 * var(--u));
-  top: calc(119 * var(--u));
-  font: 900 calc(210 * var(--u)) / calc(60 * var(--u)) Roboto, sans-serif;
-  text-transform: uppercase;
-}
-.about-text,
-.about-contacts {
-  font: 500 calc(22 * var(--u)) / calc(29 * var(--u)) Montserrat, sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.about-text {
-  left: calc(80 * var(--u));
-  top: calc(298 * var(--u));
-  width: calc(653 * var(--u));
-  height: calc(366 * var(--u));
-}
-.about-rule {
-  left: calc(81 * var(--u));
-  top: calc(695 * var(--u));
-  width: calc(599 * var(--u));
-  border: 0;
-  border-top: max(1px, calc(2 * var(--u))) solid #aba8a8;
-}
-.about-contacts-title {
-  left: calc(80 * var(--u));
-  top: calc(727 * var(--u));
-  font: 700 calc(25 * var(--u)) / 1.23 "Instrument Sans", sans-serif;
-  letter-spacing: calc(3 * var(--u));
-  text-transform: uppercase;
-}
-.about-contacts {
-  left: calc(80 * var(--u));
-  top: calc(760 * var(--u));
-  height: calc(116 * var(--u));
-  font-weight: 400;
-  font-style: normal;
-  text-transform: lowercase;
-}
-.about-photo {
-  left: calc(979 * var(--u));
-  top: 0;
-  width: calc(941 * var(--u));
-  height: 100%;
-  background: #020202;
-}
-.about-photo img {
-  position: absolute;
-  left: calc(8 * var(--u));
-  width: calc(933 * var(--u));
-  height: 100%;
-}
-.about-ring {
-  position: absolute;
-  left: calc(-138 * var(--u));
-  top: calc(296 * var(--u));
-  width: calc(304 * var(--u));
-  height: calc(304 * var(--u));
-  overflow: visible;
-  animation: spin 6s linear infinite;
-}
-.about-ring text {
-  fill: var(--orange);
-  font: 400 18px Montserrat, sans-serif;
-}
-.about-ring .b { font-weight: 700; }
-
-@keyframes spin { to { transform: rotate(1turn); } }
-
-/* Phones: the two HTML slides reflow instead of shrinking to unreadable 16:9. */
-@container (max-width: 760px) {
-  .canvas { aspect-ratio: auto; display: flex; flex-direction: column; padding: 20px 16px; }
-  .canvas > * { position: static; }
-
-  .cover .canvas { min-height: 125cqw; gap: 6px; }
-  .cover-meta, .cover-contact { font-size: 10px; line-height: 1.7; align-items: flex-start; }
-  .cover-contact { order: -1; }
-  .cover-bird { width: 82%; height: auto; margin: auto auto 0; }
-  .cover-title { margin-top: auto; font-size: calc((100cqw - 32px) / 5.45); line-height: 0.82; }
-
-  .about .canvas { padding: 32px 16px 0; gap: 18px; }
-  .about-title { font-size: 64px; line-height: 0.8; }
-  .about-text, .about-contacts { width: auto; height: auto; font-size: 15px; line-height: 1.55; }
-  .about-rule { width: 100%; border-top-width: 1px; }
-  .about-contacts-title { font-size: 15px; letter-spacing: 2px; margin-bottom: -10px; }
-  .about-photo { position: relative; left: auto; width: calc(100% + 32px); height: auto; margin: 36px -16px 0; background: transparent; }
-  .about-photo img { position: static; width: 100%; height: auto; }
-  .about-ring { left: auto; right: 5%; top: -16cqw; width: 34cqw; height: 34cqw; }
 }
 
 .to-top {
@@ -241,7 +106,6 @@ footer.bar a { color: var(--ink); text-transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .about-ring { animation: none; }
   .js .slide { opacity: 1; translate: none; transition: none; }
   .to-top { transition: none; }
 }

@@ -11,8 +11,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@900&display=swap">
-  <link rel="stylesheet" href="assets/site.css?v=ed24ba5f">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap">
+  <link rel="stylesheet" href="assets/site.css?v=4343f1a8">
 </head>
 <body>
   <header class="bar">
@@ -20,38 +20,14 @@
     <a href="mailto:morkuneruta@gmail.com">Portfolio</a>
   </header>
   <main id="top" class="deck">
-    <section class="slide cover" id="s01" aria-label="Portfolio">
-      <div class="canvas">
-        <p class="cover-meta">Rūta Morkūnė x portfolio | 2026</p>
-        <address class="cover-contact">
-          <span>LinkedIn - Rūta Morkūnė</span>
-          <a href="mailto:morkuneruta@gmail.com">Gmail - morkuneruta@gmail.com</a>
-          <a href="tel:+37067160808">Mob. numeris - 06 716 0808</a>
-        </address>
-        <img class="cover-bird" src="assets/img/bird.webp" width="1024" height="727" alt="" fetchpriority="high">
-        <h1 class="cover-title">Portfolio</h1>
-      </div>
-    </section>
-    <section class="slide about" id="s02" aria-labelledby="apie">
-      <div class="canvas">
-        <h2 class="about-title" id="apie">Apie</h2>
-        <p class="about-text">Labas! aš esu Rūta - grafikos dizainerė, šiuo metu dirbanti „media partner“ agentūroje. pagal išsilavinimą esu mados dizainerė ir stilistė. daug metų dirbu su filmavimais, reklamomis ir įvairiais kūrybiniais projektais, tačiau prieš dvejus metus nusprendžiau kryptingai pereiti į grafikos dizainą. baigiau „codeacademy“ kursus, atlikau praktiką reklamos agentūroje, o vėliau prisijungiau prie „media partner“ komandos. kasdien dirbu su skirtingais klientais - kuriu vizualus ir maketus įvairiems komunikacijos kanalams, taip pat prisidedu prie kampanijų ir banerių kūrimo. laisvalaikiu šoku, bėgioju ir siuvu :)</p>
-        <hr class="about-rule">
-        <h3 class="about-contacts-title">Kontaktai</h3>
-        <address class="about-contacts">
-          <a href="mailto:morkuneruta@gmail.com">gmail - morkuneruta@gmail.com</a>
-          <span>linkedin - rūta morkūnė</span>
-          <a href="tel:+37067160808">mob.numeris - 067160808</a>
-        </address>
-        <div class="about-photo">
-          <img src="assets/img/about-photo.webp" width="933" height="1080" alt="Rūta Morkūnė" loading="lazy" decoding="async">
-          <svg class="about-ring" viewBox="0 0 304 304" aria-hidden="true">
-            <path id="ring-path" fill="none" d="M152 302A150 150 0 1 0 152 2A150 150 0 1 0 152 302"/>
-            <text><textPath href="#ring-path" startOffset="12" textLength="918" lengthAdjust="spacing"><tspan class="b">RŪTA</tspan>MORKŪNĖRŪTAMORKŪNĖRŪTAMORKŪNĖRŪTAMORKŪNĖRŪTA<tspan class="b">MORKUNĖ</tspan></textPath></text>
-          </svg>
-        </div>
-      </div>
-    </section>
+    <figure class="slide" id="s01">
+      <img class="slide-media" src="assets/slides/01.webp" srcset="assets/slides/01-960.webp 960w, assets/slides/01.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Rūta Morkūnė – portfolio">
+    </figure>
+    <figure class="slide" id="s02">
+      <video class="slide-media" muted loop playsinline preload="none" poster="assets/slides/02.webp" aria-label="Apie – Rūta Morkūnė, grafikos dizainerė" width="1920" height="1080">
+        <source src="assets/video/02.mp4" type="video/mp4">
+      </video>
+    </figure>
     <figure class="slide" id="s03">
       <img class="slide-media" src="assets/slides/03.webp" srcset="assets/slides/03-960.webp 960w, assets/slides/03.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 3">
     </figure>
@@ -59,7 +35,9 @@
       <img class="slide-media" src="assets/slides/04.webp" srcset="assets/slides/04-960.webp 960w, assets/slides/04.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 4">
     </figure>
     <figure class="slide" id="s05">
-      <img class="slide-media" src="assets/slides/05.webp" srcset="assets/slides/05-960.webp 960w, assets/slides/05.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 5">
+      <video class="slide-media" muted loop playsinline preload="none" poster="assets/slides/05.webp" aria-label="Portfolio – 5" width="1920" height="1080">
+        <source src="assets/video/05.mp4" type="video/mp4">
+      </video>
     </figure>
     <figure class="slide" id="s06">
       <img class="slide-media" src="assets/slides/06.webp" srcset="assets/slides/06-960.webp 960w, assets/slides/06.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 6">
@@ -71,39 +49,47 @@
       <img class="slide-media" src="assets/slides/08.webp" srcset="assets/slides/08-960.webp 960w, assets/slides/08.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 8">
     </figure>
     <figure class="slide" id="s09">
-      <img class="slide-media" src="assets/slides/09.webp" srcset="assets/slides/09-960.webp 960w, assets/slides/09.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Bio Bandits – prekės ženklas">
+      <video class="slide-media" muted loop playsinline preload="none" poster="assets/slides/09.webp" aria-label="Portfolio – 9" width="1920" height="1080">
+        <source src="assets/video/09.mp4" type="video/mp4">
+      </video>
     </figure>
     <figure class="slide" id="s10">
-      <img class="slide-media" src="assets/slides/10.webp" srcset="assets/slides/10-960.webp 960w, assets/slides/10.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Bio Bandits – prekės ženklas">
+      <img class="slide-media" src="assets/slides/10.webp" srcset="assets/slides/10-960.webp 960w, assets/slides/10.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 10">
     </figure>
     <figure class="slide" id="s11">
-      <video class="slide-media" muted loop playsinline preload="none" poster="assets/slides/11.webp" aria-label="Bio Bandits – animacija" width="1920" height="1080">
+      <video class="slide-media" muted loop playsinline preload="none" poster="assets/slides/11.webp" aria-label="Portfolio – 11" width="1920" height="1080">
         <source src="assets/video/11.mp4" type="video/mp4">
       </video>
     </figure>
     <figure class="slide" id="s12">
-      <img class="slide-media" src="assets/slides/12.webp" srcset="assets/slides/12-960.webp 960w, assets/slides/12.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Bio Bandits – tipografija">
+      <img class="slide-media" src="assets/slides/12.webp" srcset="assets/slides/12-960.webp 960w, assets/slides/12.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 12">
     </figure>
     <figure class="slide" id="s13">
-      <img class="slide-media" src="assets/slides/13.webp" srcset="assets/slides/13-960.webp 960w, assets/slides/13.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Bio Bandits – logotipo spalvos">
+      <img class="slide-media" src="assets/slides/13.webp" srcset="assets/slides/13-960.webp 960w, assets/slides/13.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 13">
     </figure>
     <figure class="slide" id="s14">
-      <img class="slide-media" src="assets/slides/14.webp" srcset="assets/slides/14-960.webp 960w, assets/slides/14.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Bio Bandits – laisva zona ir klaidos">
+      <img class="slide-media" src="assets/slides/14.webp" srcset="assets/slides/14-960.webp 960w, assets/slides/14.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 14">
     </figure>
     <figure class="slide" id="s15">
-      <img class="slide-media" src="assets/slides/15.webp" srcset="assets/slides/15-960.webp 960w, assets/slides/15.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Bio Bandits – spalvų deriniai">
+      <img class="slide-media" src="assets/slides/15.webp" srcset="assets/slides/15-960.webp 960w, assets/slides/15.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 15">
     </figure>
     <figure class="slide" id="s16">
-      <img class="slide-media" src="assets/slides/16.webp" srcset="assets/slides/16-960.webp 960w, assets/slides/16.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Bio Bandits – formos">
+      <video class="slide-media" muted loop playsinline preload="none" poster="assets/slides/16.webp" aria-label="Portfolio – 16" width="1920" height="1080">
+        <source src="assets/video/16.mp4" type="video/mp4">
+      </video>
     </figure>
     <figure class="slide" id="s17">
-      <img class="slide-media" src="assets/slides/17.webp" srcset="assets/slides/17-960.webp 960w, assets/slides/17.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Bio Bandits – postai">
+      <video class="slide-media" muted loop playsinline preload="none" poster="assets/slides/17.webp" aria-label="Portfolio – 17" width="1920" height="1080">
+        <source src="assets/video/17.mp4" type="video/mp4">
+      </video>
     </figure>
     <figure class="slide" id="s18">
-      <img class="slide-media" src="assets/slides/18.webp" srcset="assets/slides/18-960.webp 960w, assets/slides/18.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Bio Bandits – feed tinklelis">
+      <video class="slide-media" muted loop playsinline preload="none" poster="assets/slides/18.webp" aria-label="Portfolio – 18" width="1920" height="1080">
+        <source src="assets/video/18.mp4" type="video/mp4">
+      </video>
     </figure>
     <figure class="slide" id="s19">
-      <video class="slide-media" muted loop playsinline preload="none" poster="assets/slides/19.webp" aria-label="Bio Bandits – feed tinklelis" width="1920" height="1080">
+      <video class="slide-media" muted loop playsinline preload="none" poster="assets/slides/19.webp" aria-label="Portfolio – 19" width="1920" height="1080">
         <source src="assets/video/19.mp4" type="video/mp4">
       </video>
     </figure>
@@ -111,7 +97,9 @@
       <img class="slide-media" src="assets/slides/20.webp" srcset="assets/slides/20-960.webp 960w, assets/slides/20.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 20">
     </figure>
     <figure class="slide" id="s21">
-      <img class="slide-media" src="assets/slides/21.webp" srcset="assets/slides/21-960.webp 960w, assets/slides/21.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 21">
+      <video class="slide-media" muted loop playsinline preload="none" poster="assets/slides/21.webp" aria-label="Portfolio – 21" width="1920" height="1080">
+        <source src="assets/video/21.mp4" type="video/mp4">
+      </video>
     </figure>
     <figure class="slide" id="s22">
       <img class="slide-media" src="assets/slides/22.webp" srcset="assets/slides/22-960.webp 960w, assets/slides/22.webp 1920w" sizes="(min-width: 1664px) 1600px, (min-width: 900px) calc(100vw - 64px), calc(100vw - 32px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Portfolio – 22">
