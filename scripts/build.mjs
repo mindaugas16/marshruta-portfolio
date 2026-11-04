@@ -1,10 +1,15 @@
 // Generates index.html from slides.json. Run: node scripts/build.mjs
+import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const read = (path) => readFileSync(root + path, 'utf8');
 const { slides } = JSON.parse(read('slides.json'));
+
+// GitHub Pages caches assets for 10 minutes; a content hash stops a new index.html
+// from being paired with a stale site.css/site.js after a deploy.
+const versioned = (path) => `${path}?v=${createHash('sha1').update(read(path)).digest('hex').slice(0, 8)}`;
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const indent = (s) => s.trim().replace(/^/gm, '    ');
@@ -43,7 +48,7 @@ const html = `<!doctype html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@900&display=swap">
-  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="${versioned('assets/site.css')}">
 </head>
 <body>
   <header class="bar">
@@ -58,9 +63,10 @@ ${slides.map(slide).join('\n')}
     <span>© ${new Date().getFullYear()} Rūta Morkūnė</span>
   </footer>
   <a class="to-top" href="#top" aria-label="Į viršų">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    <svg class="to-top-ring" viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><circle cx="28" cy="28" r="26.5" pathLength="1"/></svg>
+    <svg class="to-top-arrow" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </a>
-  <script src="assets/site.js" defer></script>
+  <script src="${versioned('assets/site.js')}" defer></script>
 </body>
 </html>
 `;

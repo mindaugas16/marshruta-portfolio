@@ -35,7 +35,8 @@ a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
-footer.bar { color: var(--muted); font-weight: 500; font-size: 13px; padding: 40px 0 48px; }
+/* Bottom padding keeps the fixed back-to-top button clear of the footer text. */
+footer.bar { color: var(--muted); font-weight: 500; font-size: 13px; padding: 40px 0 96px; }
 footer.bar a { color: var(--ink); text-transform: none; }
 
 .deck {
@@ -194,24 +195,45 @@ footer.bar a { color: var(--ink); text-transform: none; }
 }
 
 .to-top {
+  --p: 0;
   position: fixed;
-  right: max(16px, env(safe-area-inset-right));
-  bottom: max(16px, env(safe-area-inset-bottom));
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
   z-index: 10;
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: var(--orange);
-  color: #000;
-  box-shadow: 0 6px 20px rgb(0 0 0 / 0.35);
-  transition: opacity 0.3s ease, translate 0.3s ease, scale 0.2s ease;
+  background: rgb(28 28 28 / 0.72);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+  color: var(--ink);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.35), inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  transition: opacity 0.35s ease, translate 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2), background-color 0.25s ease, color 0.25s ease;
 }
-.to-top:hover { scale: 1.08; text-decoration: none; }
-.to-top:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-.to-top svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-.js .to-top:not(.is-shown) { opacity: 0; translate: 0 12px; pointer-events: none; }
+.to-top > svg { grid-area: 1 / 1; }
+.to-top-ring {
+  rotate: -90deg;
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--p));
+}
+.to-top-arrow { transition: translate 0.25s ease; }
+.to-top:hover { background: var(--orange); color: #000; text-decoration: none; }
+.to-top:hover .to-top-arrow { translate: 0 -2px; }
+.to-top:hover .to-top-ring { stroke: #000; }
+.to-top:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+.js .to-top:not(.is-shown) { opacity: 0; translate: 0 16px; pointer-events: none; }
+
+@media (max-width: 600px) {
+  .to-top { width: 48px; height: 48px; }
+  .to-top-ring { width: 48px; height: 48px; }
+  .to-top-arrow { width: 20px; height: 20px; }
+}
 
 /* Slides ease in as they scroll into view; JS adds .js so no-JS visitors see everything. */
 .js .slide { opacity: 0; translate: 0 24px; transition: opacity 0.7s ease, translate 0.7s ease; }
