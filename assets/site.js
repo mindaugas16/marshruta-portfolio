@@ -15,15 +15,37 @@ document.querySelectorAll('.slide, .tile').forEach((el) => reveal.observe(el));
 // download once they come near the viewport, and pause again when scrolled away.
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// A video should play whenever it is on screen. Browsers sometimes refuse or interrupt
+// playback (the first load of a big file, a background tab, bfcache restore, Low Power
+// Mode), so a single play() on intersect is not enough: keep track of what is on screen
+// and retry from every event that can unblock it.
+const onScreen = new Set();
+
+const tryPlay = (video) => {
+  if (!onScreen.has(video) || !video.paused || document.hidden) return;
+  video.muted = true; // autoplay is only allowed for muted video
+  video.play()?.catch(() => {});
+};
+
 const videos = new IntersectionObserver((entries) => {
   for (const { target: video, isIntersecting } of entries) {
     if (isIntersecting) {
-      video.play().catch(() => {});
+      onScreen.add(video);
+      tryPlay(video);
     } else {
+      onScreen.delete(video);
       video.pause();
     }
   }
 }, { threshold: 0.25 });
+
+const retryAll = () => onScreen.forEach(tryPlay);
+document.addEventListener('visibilitychange', retryAll);
+addEventListener('pageshow', retryAll);
+for (const type of ['pointerdown', 'touchstart', 'keydown', 'wheel']) {
+  addEventListener(type, retryAll, { passive: true });
+}
+setInterval(retryAll, 1500); // watchdog: cheap, and only touches videos that are on screen but paused
 
 const preload = new IntersectionObserver((entries) => {
   for (const { target: video, isIntersecting } of entries) {
@@ -67,6 +89,8 @@ document.querySelectorAll('video').forEach((v) => {
     v.controls = true;
     return;
   }
+  v.muted = true;
+  v.addEventListener('canplay', () => tryPlay(v));
   preload.observe(v);
   videos.observe(v);
 });

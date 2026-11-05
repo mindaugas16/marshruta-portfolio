@@ -53,21 +53,26 @@ next unused number; a removed slide's number is never reused.
 ## Visuals page
 
 `visuals.html` is built from `visuals.json`: the posts in the Figma section **"visuals and motion"**
-(`figma.section`), served from `assets/visuals/`.
+(`figma.section`, file `figma.fileKey` — since Nov 2026 a different file, "rūta", page "Page 8"),
+served from `assets/visuals/`. Posts are numbered 01…115 in grid order (5 columns × 23 rows).
 
-- Order is the grid order: group the section's direct children into rows by `y`, then sort by `x`.
-  The section contains a second, identical copy of the first three rows stacked on top; keep the
-  topmost (later in the metadata) node for each position.
+- Order is the grid order: group the section's direct children into rows by `y` (tolerance ~300),
+  then sort by `x`. Only FRAME / RECTANGLE children wider than 1000 count (skip e.g. the lightning
+  "Žaibo švytėjimas" ellipse). The first three rows exist twice at the same position; keep the
+  topmost (later in `section.children`) node for each position. Many later posts are flat image
+  RECTANGLEs with sloppy sizes (1074–1099 px) — resize them to 1080×h with `fit: cover`.
 - `h` is the post height (1350 for 4:5, 1080 for square); width is always 1080.
-- Stills: `get_screenshot` at the post's own size → `raw/visuals/<n>.png` →
-  `scripts/optimize-visuals.sh raw/visuals`.
-- Animated posts: don't go by frame names (only some say "ANIMACIJA"), and don't trust
-  `get_motion_context` on the whole section — it stops at 500 animated layers and silently drops
-  the rest. Instead run a read-only `use_figma` over `section.children` and count descendants whose
-  `node.animations` is non-empty; every post with a count > 0 is animated. Each gets
-  `"video": true`: `export_video` with `constraint` WIDTH 720
-  (full size is 2× the bytes for no visible gain at tile size) → `assets/visuals/<n>.mp4`.
-  The still is the poster.
+- Stills: `get_screenshot` (maxDimension 1400) → `raw/visuals/<n>.png` → WebP 1080 (q84) + 540 (q80).
+  `scripts/optimize-visuals.sh` needs zsh + cwebp (Mac); on Windows use `sharp` from npm.
+- Animated posts: Rūta marks them with text labels **outside the section on the page**, e.g.
+  `6 EILUTĖ. MOTION 1,3,5` = row 6, columns 1, 3 and 5 (1-based). `node.animations` and
+  `get_motion_context` return nothing for this file, so the labels are the source of truth. Each
+  animated post gets `"video": true`: `export_video` (quality high, fps 30) with `constraint`
+  WIDTH 720 (full size is 2× the bytes for no visible gain at tile size) → `assets/visuals/<n>.mp4`.
+  The still is the poster. Check afterwards that no two mp4s share an md5.
+- Playback is driven by `assets/site.js`: a video plays whenever ≥25% is on screen, and is retried
+  on `canplay`, tab-visible, `pageshow`, first user gesture and a 1.5 s watchdog. Don't go back to a
+  single `play()` on intersect — it silently fails when the browser refuses/interrupts playback.
 
 ## Gotchas
 
