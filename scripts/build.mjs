@@ -76,7 +76,7 @@ const page = ({ file, title, main }) => `<!doctype html>
 </head>
 <body>
   <header class="bar">
-    <a href="index.html">Rūta Morkūnė</a>
+    <span class="brand">Rūta Morkūnė</span>
     <nav class="nav">
       ${nav(file)}
     </nav>
