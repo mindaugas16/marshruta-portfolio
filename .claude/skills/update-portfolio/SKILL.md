@@ -50,6 +50,21 @@ next unused number; a removed slide's number is never reused.
     (`Update slides 07, 12 from Figma`) and push to `main`. GitHub Pages redeploys in ~1 minute;
     confirm with `gh run list --limit 1`.
 
+## Visuals page
+
+`visuals.html` is built from `visuals.json`: the posts in the Figma section **"visuals and motion"**
+(`figma.section`), served from `assets/visuals/`.
+
+- Order is the grid order: group the section's direct children into rows by `y`, then sort by `x`.
+  The section contains a second, identical copy of the first three rows stacked on top; keep the
+  topmost (later in the metadata) node for each position.
+- `h` is the post height (1350 for 4:5, 1080 for square); width is always 1080.
+- Stills: `get_screenshot` at the post's own size → `raw/visuals/<n>.png` →
+  `scripts/optimize-visuals.sh raw/visuals`.
+- Frames named "ANIMACIJA" get `"video": true`: `export_video` with `constraint` WIDTH 720
+  (full size is 2× the bytes for no visible gain at tile size) → `assets/visuals/<n>.mp4`.
+  The still is the poster.
+
 ## Gotchas
 
 - Text in Neulis Cursive (Bio Bandits) is a paid font — keep those slides as images/video, don't rebuild them in HTML.
