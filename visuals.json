@@ -4,6 +4,23 @@
     "section": "578:12119",
     "sectionName": "visuals and motion"
   },
+  "clients": [
+    { "name": "Pergalė", "from": 1, "to": 5 },
+    { "name": "Bio Bandits", "from": 6, "to": 10 },
+    { "name": "Upė", "from": 11, "to": 15 },
+    { "name": "Citus", "from": 16, "to": 25 },
+    { "name": "Famisano", "from": 26, "to": 35 },
+    { "name": "Rokiškio karvutė", "from": 36, "to": 45 },
+    { "name": "Meliva", "from": 46, "to": 50 },
+    { "name": "Nordic Lily", "from": 51, "to": 60 },
+    { "name": "Loomi", "from": 61, "to": 65 },
+    { "name": "Media Partner", "from": 66, "to": 75 },
+    { "name": "Baltic Petroleum", "from": 76, "to": 85 },
+    { "name": "SNKRS", "from": 86, "to": 95 },
+    { "name": "Biomax", "from": 96, "to": 105 },
+    { "name": "CV-Online", "from": 106, "to": 110 },
+    { "name": "Mototoja", "from": 111, "to": 115 }
+  ],
   "posts": [
     { "n":"01", "node":"578:13372", "h":1350, "alt":"Socialinių tinklų įrašas", "video":true },
     { "n":"02", "node":"578:13480", "h":1350, "alt":"Socialinių tinklų įrašas" },

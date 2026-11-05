@@ -65,9 +65,27 @@ footer.bar a { color: var(--ink); text-transform: none; }
   background: #262626;
 }
 
-.visuals {
+/* Visuals: one section per client. Names share the header's type and the grid's left edge. */
+.clients {
   width: min(100% - 2 * var(--gutter), var(--deck));
   margin: 0 auto;
+}
+.client + .client { margin-top: 72px; }
+.client-name {
+  margin: 0 0 20px;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: left;
+}
+@media (max-width: 600px) {
+  .client + .client { margin-top: 56px; }
+  .client-name { font-size: 17px; margin-bottom: 16px; }
+}
+
+.visuals {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: start;

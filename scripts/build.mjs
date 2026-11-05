@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const read = (path) => readFileSync(root + path, 'utf8');
 const { slides } = JSON.parse(read('slides.json'));
-const { posts } = JSON.parse(read('visuals.json'));
+const { posts, clients } = JSON.parse(read('visuals.json'));
 
 // GitHub Pages caches assets for 10 minutes; a content hash stops a new index.html
 // from being paired with a stale site.css/site.js after a deploy.
@@ -105,10 +105,23 @@ writeFileSync(root + 'index.html', page({
   main: `  <main id="top" class="deck">\n${slides.map(slide).join('\n')}\n  </main>`,
 }));
 
+// The Visuals page has one section per client: visuals.json "clients" are ranges of post numbers.
+const inClient = ({ from, to }, { n }) => Number(n) >= from && Number(n) <= to;
+
+const unassigned = posts.filter((p) => !clients.some((c) => inClient(c, p)));
+if (unassigned.length) throw new Error(`Posts without a client: ${unassigned.map((p) => p.n).join(', ')}`);
+
+const clientSection = (client) => `    <section class="client">
+      <h2 class="client-name">${esc(client.name)}</h2>
+      <div class="visuals">
+${posts.filter((p) => inClient(client, p)).map(post).join('\n').replace(/^/gm, '    ')}
+      </div>
+    </section>`;
+
 writeFileSync(root + 'visuals.html', page({
   file: 'visuals.html',
   title: 'Rūta Morkūnė – Visuals',
-  main: `  <main id="top" class="visuals">\n${posts.map(post).join('\n')}\n  </main>`,
+  main: `  <main id="top" class="clients">\n${clients.map(clientSection).join('\n')}\n  </main>`,
 }));
 
 console.log(`index.html: ${slides.length} slides (${slides.filter((s) => s.html).length} html, ${slides.filter((s) => s.video).length} video)`);
