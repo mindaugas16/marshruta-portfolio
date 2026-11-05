@@ -9,7 +9,7 @@ const reveal = new IntersectionObserver((entries) => {
   }
 }, { rootMargin: '0px 0px -8% 0px' });
 
-document.querySelectorAll('.slide').forEach((el) => reveal.observe(el));
+document.querySelectorAll('.slide, .tile').forEach((el) => reveal.observe(el));
 
 // Videos use preload="none" (the Bio Bandits loop alone is ~18 MB), so they only
 // download once they come near the viewport, and pause again when scrolled away.
@@ -35,7 +35,8 @@ const preload = new IntersectionObserver((entries) => {
 }, { rootMargin: '150% 0px' });
 
 const toTop = document.querySelector('.to-top');
-const cover = document.querySelector('.slide');
+// The Visuals page has no cover slide, so the button appears once the header scrolls away.
+const cover = document.querySelector('.slide') ?? document.querySelector('header');
 
 new IntersectionObserver(([entry]) => {
   toTop.classList.toggle('is-shown', !entry.isIntersecting);

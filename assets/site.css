@@ -35,6 +35,8 @@ a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+.nav { display: flex; gap: 1.25em; }
+
 /* Bottom padding keeps the fixed back-to-top button clear of the footer text. */
 footer.bar { color: var(--muted); font-weight: 500; font-size: 13px; padding: 40px 0 96px; }
 footer.bar a { color: var(--ink); text-transform: none; }
@@ -56,6 +58,26 @@ footer.bar a { color: var(--ink); text-transform: none; }
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
+  background: #262626;
+}
+
+.visuals {
+  width: min(100% - 2 * var(--gutter), var(--deck));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+  gap: 8px;
+}
+@media (min-width: 601px) { .visuals { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px) { .visuals { grid-template-columns: repeat(5, 1fr); gap: 10px; } }
+
+.tile { margin: 0; overflow: hidden; }
+
+.tile-media {
+  display: block;
+  width: 100%;
+  height: auto;
   background: #262626;
 }
 
@@ -101,12 +123,12 @@ footer.bar a { color: var(--ink); text-transform: none; }
 }
 
 /* Slides ease in as they scroll into view; JS adds .js so no-JS visitors see everything. */
-.js .slide { opacity: 0; translate: 0 24px; transition: opacity 0.7s ease, translate 0.7s ease; }
-.js .slide.is-in { opacity: 1; translate: none; }
+.js :is(.slide, .tile) { opacity: 0; translate: 0 24px; transition: opacity 0.7s ease, translate 0.7s ease; }
+.js :is(.slide, .tile).is-in { opacity: 1; translate: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js .slide { opacity: 1; translate: none; transition: none; }
+  .js :is(.slide, .tile) { opacity: 1; translate: none; transition: none; }
   .to-top { transition: none; }
 }
 

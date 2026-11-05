@@ -1,4 +1,4 @@
-// Generates index.html from slides.json. Run: node scripts/build.mjs
+// Generates index.html from slides.json and visuals.html from visuals.json. Run: node scripts/build.mjs
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const read = (path) => readFileSync(root + path, 'utf8');
 const { slides } = JSON.parse(read('slides.json'));
+const { posts } = JSON.parse(read('visuals.json'));
 
 // GitHub Pages caches assets for 10 minutes; a content hash stops a new index.html
 // from being paired with a stale site.css/site.js after a deploy.
@@ -34,14 +35,37 @@ function slide({ n, alt, video, html }) {
 </figure>`);
 }
 
-const html = `<!doctype html>
+function post({ n, h, alt, video }) {
+  const label = esc(alt ?? `Visual – ${Number(n)}`);
+  const img = `assets/visuals/${n}`;
+
+  if (video) {
+    return indent(`
+<figure class="tile">
+  <video class="tile-media" muted loop playsinline preload="none" poster="${img}.webp" aria-label="${label}" width="1080" height="${h}">
+    <source src="${img}.mp4" type="video/mp4">
+  </video>
+</figure>`);
+  }
+  return indent(`
+<figure class="tile">
+  <img class="tile-media" src="${img}-540.webp" srcset="${img}-540.webp 540w, ${img}.webp 1080w" sizes="(min-width: 1664px) 320px, (min-width: 900px) calc((100vw - 64px) / 5), (min-width: 601px) calc((100vw - 32px) / 3), calc((100vw - 32px) / 2)" width="1080" height="${h}" loading="lazy" decoding="async" alt="${label}">
+</figure>`);
+}
+
+const nav = (current) =>
+  [['index.html', 'Portfolio'], ['visuals.html', 'Visuals']]
+    .map(([href, text]) => `<a href="${href}"${href === current ? ' aria-current="page"' : ''}>${text}</a>`)
+    .join('\n      ');
+
+const page = ({ file, title, main }) => `<!doctype html>
 <html lang="lt">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rūta Morkūnė – Portfolio</title>
+  <title>${title}</title>
   <meta name="description" content="Rūta Morkūnė – grafikos dizainerė. Prekės ženklai, socialinių tinklų turinys, animacija.">
-  <meta property="og:title" content="Rūta Morkūnė – Portfolio">
+  <meta property="og:title" content="${title}">
   <meta property="og:description" content="Grafikos dizainerės portfolio.">
   <meta property="og:image" content="https://marshruta.lt/assets/og.jpg">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -52,12 +76,12 @@ const html = `<!doctype html>
 </head>
 <body>
   <header class="bar">
-    <a href="#top">Rūta Morkūnė</a>
-    <a href="mailto:morkuneruta@gmail.com">Portfolio</a>
+    <a href="index.html">Rūta Morkūnė</a>
+    <nav class="nav">
+      ${nav(file)}
+    </nav>
   </header>
-  <main id="top" class="deck">
-${slides.map(slide).join('\n')}
-  </main>
+${main}
   <footer class="bar">
     <a href="mailto:morkuneruta@gmail.com">morkuneruta@gmail.com</a>
     <span>© ${new Date().getFullYear()} Rūta Morkūnė</span>
@@ -71,5 +95,17 @@ ${slides.map(slide).join('\n')}
 </html>
 `;
 
-writeFileSync(root + 'index.html', html);
+writeFileSync(root + 'index.html', page({
+  file: 'index.html',
+  title: 'Rūta Morkūnė – Portfolio',
+  main: `  <main id="top" class="deck">\n${slides.map(slide).join('\n')}\n  </main>`,
+}));
+
+writeFileSync(root + 'visuals.html', page({
+  file: 'visuals.html',
+  title: 'Rūta Morkūnė – Visuals',
+  main: `  <main id="top" class="visuals">\n${posts.map(post).join('\n')}\n  </main>`,
+}));
+
 console.log(`index.html: ${slides.length} slides (${slides.filter((s) => s.html).length} html, ${slides.filter((s) => s.video).length} video)`);
+console.log(`visuals.html: ${posts.length} posts (${posts.filter((p) => p.video).length} video)`);
