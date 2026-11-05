@@ -61,7 +61,10 @@ next unused number; a removed slide's number is never reused.
 - `h` is the post height (1350 for 4:5, 1080 for square); width is always 1080.
 - Stills: `get_screenshot` at the post's own size → `raw/visuals/<n>.png` →
   `scripts/optimize-visuals.sh raw/visuals`.
-- Frames named "ANIMACIJA" get `"video": true`: `export_video` with `constraint` WIDTH 720
+- Animated posts: don't go by frame names (only some say "ANIMACIJA"). Run `get_motion_context`
+  on the section with `recursive: true` and take each `timelineCohorts[].rootNodeId`. For the
+  duplicated rows the animation can sit on the lower copy while the top copy is static — use the
+  animated node for that post. Each gets `"video": true`: `export_video` with `constraint` WIDTH 720
   (full size is 2× the bytes for no visible gain at tile size) → `assets/visuals/<n>.mp4`.
   The still is the poster.
 
