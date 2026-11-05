@@ -12,6 +12,10 @@ const { posts } = JSON.parse(read('visuals.json'));
 // from being paired with a stale site.css/site.js after a deploy.
 const versioned = (path) => `${path}?v=${createHash('sha1').update(read(path)).digest('hex').slice(0, 8)}`;
 
+// Visuals files are re-exported under the same names, and GitHub Pages lets browsers cache them for
+// 10 minutes; a content hash in the URL keeps old and new posts from being mixed after a deploy.
+const hashed = (path) => `${path}?v=${createHash('sha1').update(readFileSync(root + path)).digest('hex').slice(0, 8)}`;
+
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const indent = (s) => s.trim().replace(/^/gm, '    ');
 
@@ -42,14 +46,14 @@ function post({ n, h, alt, video }) {
   if (video) {
     return indent(`
 <figure class="tile">
-  <video class="tile-media" muted loop playsinline preload="none" poster="${img}.webp" aria-label="${label}" width="1080" height="${h}">
-    <source src="${img}.mp4" type="video/mp4">
+  <video class="tile-media" muted loop playsinline preload="none" poster="${hashed(img + '.webp')}" aria-label="${label}" width="1080" height="${h}">
+    <source src="${hashed(img + '.mp4')}" type="video/mp4">
   </video>
 </figure>`);
   }
   return indent(`
 <figure class="tile">
-  <img class="tile-media" src="${img}-540.webp" srcset="${img}-540.webp 540w, ${img}.webp 1080w" sizes="(min-width: 1664px) 320px, (min-width: 900px) calc((100vw - 64px) / 5), (min-width: 601px) calc((100vw - 32px) / 3), calc((100vw - 32px) / 2)" width="1080" height="${h}" loading="lazy" decoding="async" alt="${label}">
+  <img class="tile-media" src="${hashed(img + '-540.webp')}" srcset="${hashed(img + '-540.webp')} 540w, ${hashed(img + '.webp')} 1080w" sizes="(min-width: 1664px) 320px, (min-width: 900px) calc((100vw - 64px) / 5), (min-width: 601px) calc((100vw - 32px) / 3), calc((100vw - 32px) / 2)" width="1080" height="${h}" loading="lazy" decoding="async" alt="${label}">
 </figure>`);
 }
 
